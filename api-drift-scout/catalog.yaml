@@ -1,0 +1,9 @@
+id: api-drift-scout
+origin: codex
+kind: skill
+tags: [api, debugging, dependencies]
+targets:
+  codex: true
+  claude: false
+  factory: false
+scope: general

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Seeded Catalog Sync"
+  short_description: "Keep static catalogs and DB seed paths aligned"
+  default_prompt: "Use $seeded-catalog-sync to keep static catalog files, seed scripts, and runtime reads aligned when content is added or moved."

@@ -1,0 +1,11 @@
+id: photo-geolocator
+origin: claude
+kind: skill
+tags: [photos, exif, geolocation]
+targets:
+  codex: false
+  claude: true
+  desktop: true
+  factory: false
+scope: general
+related: [screenshot]

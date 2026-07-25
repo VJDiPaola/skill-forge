@@ -1,0 +1,10 @@
+id: testing-strategy
+origin: claude
+kind: skill
+tags: [testing, quality, strategy]
+targets:
+  codex: true
+  claude: true
+  factory: false
+scope: general
+related: [react-query-test-harness-fixer, gh-fix-ci]

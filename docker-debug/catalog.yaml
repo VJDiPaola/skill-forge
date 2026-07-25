@@ -1,0 +1,9 @@
+id: docker-debug
+origin: claude
+kind: skill
+tags: [docker, containers, debugging]
+targets:
+  codex: true
+  claude: true
+  factory: false
+scope: general

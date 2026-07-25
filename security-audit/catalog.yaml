@@ -1,0 +1,10 @@
+﻿id: security-audit
+origin: claude
+kind: command
+tags: [security, audit, supply-chain]
+targets:
+  codex: true
+  claude: true
+  factory: false
+scope: general
+related: [security-best-practices, security-threat-model, security-ownership-map]

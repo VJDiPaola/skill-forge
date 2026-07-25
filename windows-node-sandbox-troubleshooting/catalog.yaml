@@ -1,0 +1,9 @@
+﻿id: windows-node-sandbox-troubleshooting
+origin: codex
+kind: skill
+tags: [windows, node, debugging]
+targets:
+  codex: true
+  claude: false
+  factory: false
+scope: general

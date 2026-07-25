@@ -1,0 +1,9 @@
+id: interactive-artifact-generator
+origin: codex
+kind: skill
+tags: [frontend, artifacts, ui-generation]
+targets:
+  codex: true
+  claude: false
+  factory: false
+scope: general

@@ -1,0 +1,10 @@
+﻿id: force-graph-3d
+origin: claude
+kind: command
+tags: [frontend, three-js, ui-generation]
+targets:
+  codex: false
+  claude: true
+  factory: false
+scope: general
+related: [3d-bloom-scene, glassmorphic-ui]

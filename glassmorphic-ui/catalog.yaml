@@ -1,0 +1,10 @@
+﻿id: glassmorphic-ui
+origin: claude
+kind: command
+tags: [frontend, css, ui-generation]
+targets:
+  codex: false
+  claude: true
+  factory: false
+scope: general
+related: [3d-bloom-scene, force-graph-3d]

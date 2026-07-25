@@ -1,0 +1,9 @@
+id: pr-shell-safety-pack
+origin: codex
+kind: skill
+tags: [windows, git, shell]
+targets:
+  codex: true
+  claude: false
+  factory: false
+scope: general

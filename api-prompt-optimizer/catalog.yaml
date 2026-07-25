@@ -1,0 +1,11 @@
+id: api-prompt-optimizer
+origin: claude
+kind: skill
+tags: [evals, ai-product, methodology]
+targets:
+  codex: true
+  claude: true
+  desktop: true
+  factory: false
+scope: general
+related: [eval-framework, behavior-spec-canvas, autonomy-map]

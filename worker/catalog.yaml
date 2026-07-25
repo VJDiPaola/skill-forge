@@ -1,0 +1,9 @@
+﻿id: worker
+origin: factory
+tags: [delegation, general-purpose]
+kind: droid
+targets:
+  codex: false
+  claude: false
+  factory: true
+scope: general

@@ -1,0 +1,10 @@
+﻿id: screenshot
+origin: codex
+kind: skill
+tags: [capture, desktop]
+targets:
+  codex: true
+  claude: true
+  factory: false
+scope: general
+related: [playwright, playwright-interactive, photo-geolocator]

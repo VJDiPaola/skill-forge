@@ -1,0 +1,25 @@
+# Watcher runtime log
+watcher.log
+
+# Backup directories created during sync
+*.bak/
+*.bak
+
+# Auto-generated catalog (rebuilt on every push)
+catalog.json
+
+# Eval harness output
+evals/reports/*.json
+evals/reports/*.md
+
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.token
+.token-*
+
+# OS / editor
+.DS_Store
+Thumbs.db

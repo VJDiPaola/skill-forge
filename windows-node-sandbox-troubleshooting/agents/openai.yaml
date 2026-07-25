@@ -1,0 +1,4 @@
+interface:
+  display_name: "Windows Node Sandbox"
+  short_description: "Fix Windows npm and workdir failures"
+  default_prompt: "Use $windows-node-sandbox-troubleshooting to diagnose Windows-specific npm, workdir, and sandbox execution failures."

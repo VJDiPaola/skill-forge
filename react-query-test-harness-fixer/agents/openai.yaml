@@ -1,0 +1,4 @@
+interface:
+  display_name: "React Query Test Harness"
+  short_description: "Repair tests around QueryClient and API mocks"
+  default_prompt: "Use $react-query-test-harness-fixer to fix tests for React Query components with QueryClientProvider, fetch stubs, and browser API mocks."

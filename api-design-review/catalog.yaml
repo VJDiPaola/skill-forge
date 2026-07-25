@@ -1,0 +1,9 @@
+id: api-design-review
+origin: claude
+kind: skill
+tags: [api, rest, graphql, openapi]
+targets:
+  codex: true
+  claude: true
+  factory: false
+scope: general

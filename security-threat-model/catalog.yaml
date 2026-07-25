@@ -1,0 +1,10 @@
+﻿id: security-threat-model
+origin: codex
+kind: skill
+tags: [security, review]
+targets:
+  codex: true
+  claude: true
+  factory: false
+scope: general
+related: [security-best-practices, security-audit, security-ownership-map]

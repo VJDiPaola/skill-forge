@@ -1,0 +1,9 @@
+﻿id: seeded-catalog-sync
+origin: codex
+kind: skill
+tags: [catalog, content-management]
+targets:
+  codex: true
+  claude: false
+  factory: false
+scope: general

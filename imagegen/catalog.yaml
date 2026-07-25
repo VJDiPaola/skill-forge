@@ -1,0 +1,10 @@
+﻿id: imagegen
+origin: codex
+kind: skill
+tags: [image, openai-api, generation]
+targets:
+  codex: true
+  claude: true
+  factory: false
+scope: general
+related: [speech, transcribe]

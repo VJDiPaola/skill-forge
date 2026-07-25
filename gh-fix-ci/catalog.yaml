@@ -1,0 +1,10 @@
+﻿id: gh-fix-ci
+origin: codex
+kind: skill
+tags: [github, ci, debugging]
+targets:
+  codex: true
+  claude: true
+  factory: false
+scope: general
+related: [cloudflare-deploy, git-workflows, testing-strategy]

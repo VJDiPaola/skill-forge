@@ -1,0 +1,10 @@
+id: git-workflows
+origin: claude
+kind: skill
+tags: [git, history, debugging, recovery]
+targets:
+  codex: true
+  claude: true
+  factory: false
+scope: general
+related: [gh-fix-ci]

@@ -1,0 +1,10 @@
+﻿id: transcribe
+origin: codex
+kind: skill
+tags: [audio, openai-api]
+targets:
+  codex: true
+  claude: true
+  factory: false
+scope: general
+related: [speech, imagegen]

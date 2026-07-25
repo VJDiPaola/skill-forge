@@ -1,0 +1,9 @@
+id: repo-first-vercel-build
+origin: codex
+kind: skill
+tags: [nextjs, vercel, scaffold]
+targets:
+  codex: true
+  claude: false
+  factory: false
+scope: general

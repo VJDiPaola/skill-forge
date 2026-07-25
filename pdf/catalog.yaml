@@ -1,0 +1,9 @@
+﻿id: pdf
+origin: codex
+kind: skill
+tags: [document, generation]
+targets:
+  codex: true
+  claude: true
+  factory: false
+scope: general

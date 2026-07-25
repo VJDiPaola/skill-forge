@@ -1,0 +1,3 @@
+interface:
+  display_name: "Windows CLI And WSL Repair"
+  short_description: "Diagnose PATH shims, npm native installs, sandbox artifacts, and WSL Ubuntu state."

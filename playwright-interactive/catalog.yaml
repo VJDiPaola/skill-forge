@@ -1,0 +1,10 @@
+﻿id: playwright-interactive
+origin: codex
+kind: skill
+tags: [browser-automation, testing]
+targets:
+  codex: true
+  claude: false
+  factory: false
+scope: general
+related: [playwright, screenshot]

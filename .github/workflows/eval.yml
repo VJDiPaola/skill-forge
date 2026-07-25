@@ -1,0 +1,54 @@
+name: eval
+
+# Runs the skill-library evaluation harness on every push and PR.
+# Fails the run if any skill has error-severity issues (exit code 2).
+#
+# See evals/README.md for the full check list and AGENTS.md section 9 for
+# the underlying rubric. The Python harness is the source of truth for now;
+# sync.ps1 lint enforces a stable subset (see the "Extend sync.ps1 lint"
+# commit for which checks are promoted).
+
+on:
+  push:
+    branches:
+      - main
+      - "claude/**"
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  eval:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Freshness check reads git log; fetch full history so dates are accurate.
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install eval dependencies
+        run: pip install -r evals/requirements.txt
+
+      - name: Run eval harness (general-scope)
+        run: python evals/eval.py --scope general
+
+      - name: Run eval harness (all skills)
+        # Non-blocking second pass so the report covers project skills too.
+        # If an error shows up only in project skills, we want to see it in the log.
+        if: always()
+        run: python evals/eval.py --scope all --output-prefix evals/reports/ci-all
+
+      - name: Upload eval reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-reports
+          path: evals/reports/
+          retention-days: 30

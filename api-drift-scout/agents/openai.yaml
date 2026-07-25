@@ -1,0 +1,3 @@
+interface:
+  display_name: "API Drift Scout"
+  short_description: "Check installed SDKs, generated bindings, live schemas, docs, and account resources."

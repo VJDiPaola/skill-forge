@@ -1,0 +1,9 @@
+﻿id: user-testing-flow-validator
+origin: factory
+tags: [testing, validation, e2e]
+kind: droid
+targets:
+  codex: false
+  claude: false
+  factory: true
+scope: general

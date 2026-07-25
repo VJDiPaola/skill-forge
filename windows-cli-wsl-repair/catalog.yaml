@@ -1,0 +1,9 @@
+id: windows-cli-wsl-repair
+origin: codex
+kind: skill
+tags: [windows, wsl, debugging]
+targets:
+  codex: true
+  claude: false
+  factory: false
+scope: general

@@ -1,0 +1,10 @@
+﻿id: cloudflare-deploy
+origin: codex
+kind: skill
+tags: [deployment, cloudflare, infrastructure]
+targets:
+  codex: true
+  claude: false
+  factory: false
+scope: general
+related: [gh-fix-ci]

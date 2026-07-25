@@ -1,0 +1,10 @@
+﻿id: 3d-bloom-scene
+origin: claude
+kind: command
+tags: [frontend, three-js, ui-generation]
+targets:
+  codex: false
+  claude: true
+  factory: false
+scope: general
+related: [force-graph-3d, glassmorphic-ui]

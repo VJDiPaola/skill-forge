@@ -1,0 +1,9 @@
+id: database-design
+origin: claude
+kind: skill
+tags: [database, sql, migrations, performance]
+targets:
+  codex: true
+  claude: true
+  factory: false
+scope: general

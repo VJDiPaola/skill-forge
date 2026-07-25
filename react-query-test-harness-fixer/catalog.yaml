@@ -1,0 +1,10 @@
+﻿id: react-query-test-harness-fixer
+origin: codex
+kind: skill
+tags: [testing, react, debugging]
+targets:
+  codex: true
+  claude: false
+  factory: true
+scope: general
+related: [testing-strategy]

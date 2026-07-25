@@ -1,0 +1,9 @@
+﻿id: sdk-ui-override-specialist
+origin: factory
+kind: droid
+tags: [sdk, css, customization]
+targets:
+  codex: true
+  claude: false
+  factory: true
+scope: general

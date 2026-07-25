@@ -1,0 +1,9 @@
+﻿id: scrutiny-feature-reviewer
+origin: factory
+tags: [code-review, validation]
+kind: droid
+targets:
+  codex: false
+  claude: false
+  factory: true
+scope: general
