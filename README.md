@@ -6,6 +6,8 @@
 
 [![eval](https://github.com/VJDiPaola/skill-forge/actions/workflows/eval.yml/badge.svg)](https://github.com/VJDiPaola/skill-forge/actions/workflows/eval.yml)
 
+📋 **[Read the case study](./CASE-STUDY.md)** for the design decisions, measured results, and what I would improve.
+
 ---
 
 ## The problem this solves
