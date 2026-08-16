@@ -1,6 +1,6 @@
 # skill-forge
 
-**An 18-check CI gate for AI coding-agent skills.** A malformed skill does not throw. It just quietly makes the agent worse. This repo treats the library as software: one source of truth, a schema, a linter, and a build that fails on errors.
+**A 19-check CI gate for AI coding-agent skills.** A malformed skill does not throw. It just quietly makes the agent worse. This repo treats the library as software: one source of truth, a schema, a linter, and a build that fails on errors.
 
 [![eval](https://github.com/VJDiPaola/skill-forge/actions/workflows/eval.yml/badge.svg)](https://github.com/VJDiPaola/skill-forge/actions/workflows/eval.yml)
 
@@ -66,7 +66,7 @@ Target one tool: `./sync.sh push codex`
 
 ## The eval harness
 
-`evals/eval.py` runs 18 checks in two layers. Exit code is `0` when clean and `2` when any error-severity issue is present, which is what makes it usable as a CI gate.
+`evals/eval.py` runs 19 checks in two layers. Exit code is `0` when clean and `2` when any error-severity issue is present, which is what makes it usable as a CI gate.
 
 **Layer 1, mechanical.** Every skill must load, must have `name` and `description` in frontmatter, must carry all six required `catalog.yaml` keys, must have an `id` matching its directory, must declare a valid scope, and must target at least one tool. Any failure here is an error and fails the build.
 

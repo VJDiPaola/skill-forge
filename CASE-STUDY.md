@@ -69,7 +69,7 @@ If A lists B, B must list A.
 *Why:* one-way links rot asymmetrically. You delete B, A still points at it, and nothing notices until an agent follows a dead reference. Bidirectional enforcement means the graph is either consistent or the build is red.
 
 **Three severities, but only errors fail the build.**
-Six mechanical checks are errors. Twelve quality checks are warnings and infos.
+The registry contains 19 checks. Error-severity findings fail the build; warnings and infos remain advisory.
 *Alternatives:* fail on any finding.
 *Why:* a gate that fails on style opinions gets disabled within a week. Errors are things that are objectively broken: unparseable files, missing required keys, an `id` that does not match its directory. Warnings are judgment: description length, size discipline, missing scope boundaries. Currently 29 infos are outstanding and the build is green, which is the intended state. The 28 `out_of_scope_clarity` infos are a standing invitation, not a defect.
 
