@@ -2,7 +2,7 @@
 
 An engineering report on treating an AI skill library as software: one source of truth, a schema, a linter, and CI.
 
-**Status:** in daily use. This repository is a public extraction of a larger private library, carrying the platform (sync engine, eval harness, schema) and the 38 skills that are safe to publish. The private library holds personal and project-scoped skills that would mislead an agent working in someone else's codebase.
+**Status:** the platform (sync engine, eval harness, schema) is the public artifact. The skills in this tree are the test corpus that keep the gate honest. Personal and project-scoped skills stay private so they cannot mislead an agent working in someone else's codebase.
 
 ---
 
@@ -69,7 +69,7 @@ If A lists B, B must list A.
 *Why:* one-way links rot asymmetrically. You delete B, A still points at it, and nothing notices until an agent follows a dead reference. Bidirectional enforcement means the graph is either consistent or the build is red.
 
 **Three severities, but only errors fail the build.**
-Six mechanical checks are errors. Twelve quality checks are warnings and infos.
+The registry contains 19 checks. Error-severity findings fail the build; warnings and infos remain advisory.
 *Alternatives:* fail on any finding.
 *Why:* a gate that fails on style opinions gets disabled within a week. Errors are things that are objectively broken: unparseable files, missing required keys, an `id` that does not match its directory. Warnings are judgment: description length, size discipline, missing scope boundaries. Currently 29 infos are outstanding and the build is green, which is the intended state. The 28 `out_of_scope_clarity` infos are a standing invitation, not a defect.
 
@@ -88,18 +88,20 @@ The harness reads `git log` to date each skill, which is why CI checks out with 
 
 | | |
 |---|---|
-| Skills | 38 |
+| Skills in the public tree | 38 (the test corpus, not the product) |
 | Errors | 0 |
 | Warnings | 0 |
-| Grade A | 38 of 38 |
-| Infos outstanding | 29 (advisory, non-blocking) |
-| CI runtime | 17 seconds |
+| Grade A | 38 of 38 — this is a linter grade (0 errors, 0 warnings), not a claim that the skills are effective |
+| Infos outstanding | advisory, non-blocking (`out_of_scope_clarity` and similar) |
+| CI runtime | ~17 seconds |
 
 The eval workflow passed on the first push, from a cold checkout, with no local state.
 
 **The extraction was itself a test of the harness.** Pulling 38 skills out of a 67-skill library broke exactly two cross-links (`eval-framework` pointed at a skill left behind, and so did `photo-geolocator`). The harness caught both, plus a bidirectional violation introduced by the fix. That is the check earning its keep: a manual extraction of this size would otherwise have shipped dangling references, and nothing would have surfaced them until an agent followed one.
 
 **What is not measured:** whether the skills make agents measurably better. The harness validates structure and consistency, not effectiveness. A skill can score grade A and still give bad advice. That gap is the honest limitation of the whole approach.
+
+**What was removed from the public tree:** a vendored Cloudflare docs dump under `cloudflare-deploy/references/` (300+ markdown files). The skill is a decision tree that points at official docs. Shipping a documentation mirror next to a linter made the repo look larger than the platform.
 
 ## 6. What I would improve
 

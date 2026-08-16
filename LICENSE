@@ -19,16 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-THIRD-PARTY NOTICE
-
-Some skill directories are adapted from upstream sources and carry their own
-LICENSE.txt (Apache License 2.0). Those licenses govern the contents of those
-directories and take precedence over the MIT license above:
-
-  cloudflare-deploy/        gh-fix-ci/               imagegen/
-  pdf/                      playwright/              playwright-interactive/
-  screenshot/               security-best-practices/
-  security-ownership-map/   security-threat-model/

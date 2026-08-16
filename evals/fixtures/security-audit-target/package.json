@@ -1,0 +1,11 @@
+{
+  "name": "security-audit-target",
+  "private": true,
+  "description": "Fixture only. A typosquat-looking dependency and a postinstall hook so the security-audit skill has something to inspect.",
+  "dependencies": {
+    "lodahs": "4.17.21"
+  },
+  "scripts": {
+    "postinstall": "node -e \"console.log('fixture postinstall')\""
+  }
+}

@@ -83,6 +83,8 @@ Each skill gets a grade based on its issue counts:
 
 Infos never affect the grade — they exist to surface judgment calls for human review.
 
+Grade A means the skill is well-formed. It is not a claim that the skill makes an agent better. `evals/test_behavior.py` is a separate fixture check for high-stakes skills (currently `security-audit`).
+
 ## Output
 
 - `reports/baseline.json` — machine-readable; stable schema for comparison runs.

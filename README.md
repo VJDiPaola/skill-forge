@@ -1,12 +1,12 @@
 # skill-forge
 
-**A skill library for AI coding agents, with a CI quality gate that fails the build when a skill is malformed.**
-
-38 skills, one canonical source, synced to four tools. The interesting part is not the skills. It is the machinery that keeps them consistent: an 18-check eval harness that runs on every push and refuses to let a broken skill through.
+**A 19-check CI gate for AI coding-agent skills.** A malformed skill does not throw. It just quietly makes the agent worse. This repo treats the library as software: one source of truth, a schema, a linter, and a build that fails on errors.
 
 [![eval](https://github.com/VJDiPaola/skill-forge/actions/workflows/eval.yml/badge.svg)](https://github.com/VJDiPaola/skill-forge/actions/workflows/eval.yml)
 
-📋 **[Read the case study](./CASE-STUDY.md)** for the design decisions, measured results, and what I would improve.
+The skills in this tree are the test corpus. The product is the harness.
+
+📋 **[Read the case study](./CASE-STUDY.md)** for the design decisions, measured results, and what the linter cannot catch.
 
 ---
 
@@ -20,7 +20,7 @@ Once you write more than a dozen agent skills, they rot in ways that are invisib
 - A skill grows to 400 lines and blows the context budget it was supposed to save.
 - The copy in your Claude directory drifts from the copy in your Codex directory, and you cannot tell which is current.
 
-None of these throw an error. They just quietly make the agent worse. This repo treats a skill library as software: one source of truth, a schema, a linter, and CI.
+None of these throw an error. This repo is the quality gate those failures never had.
 
 ## How it works
 
@@ -51,6 +51,7 @@ Run the quality gate:
 
 ```bash
 python evals/eval.py
+python evals/test_behavior.py   # fixture check for a high-stakes skill
 ```
 
 Sync to your tools:
@@ -65,20 +66,13 @@ Target one tool: `./sync.sh push codex`
 
 ## The eval harness
 
-`evals/eval.py` is 677 lines and runs 18 checks in two layers. Exit code is `0` when clean and `2` when any error-severity issue is present, which is what makes it usable as a CI gate.
+`evals/eval.py` runs 19 checks in two layers. Exit code is `0` when clean and `2` when any error-severity issue is present, which is what makes it usable as a CI gate.
 
 **Layer 1, mechanical.** Every skill must load, must have `name` and `description` in frontmatter, must carry all six required `catalog.yaml` keys, must have an `id` matching its directory, must declare a valid scope, and must target at least one tool. Any failure here is an error and fails the build.
 
 **Layer 2, quality.** Description length and trigger phrasing, cross-link integrity in both directions, cluster membership consistency, size discipline, freshness measured against git history, and category conventions. A security skill that never references CWE, CVE, OWASP, or a severity level gets flagged. These are warnings and infos, so they surface without blocking.
 
-Current state of this library:
-
-| | |
-|---|---|
-| Skills audited | 38 |
-| Errors | 0 |
-| Warnings | 0 |
-| Grade A | 38 of 38 |
+This is a linter, not a proof that the skills make agents better. A skill can pass every check and still give bad advice. Grade A means 0 errors and 0 warnings on structure. It does not mean the skill is effective.
 
 ```bash
 python evals/eval.py --stdout --format markdown   # full report to stdout
@@ -116,15 +110,17 @@ related: [eval-framework, behavior-spec-canvas, api-prompt-optimizer]
 
 ## What is in here
 
-**Agent and AI design** `autonomy-map` · `behavior-spec-canvas` · `eval-framework` · `api-prompt-optimizer`
+The tree is a working library used to exercise the harness, not a catalog to star. High-stakes skills get a fixture check in `evals/test_behavior.py` in addition to the linter.
 
-Design methodology for AI features: mapping autonomy levels, writing behavioral contracts, and building an eval framework before writing code.
+**Agent and AI design** `autonomy-map` · `behavior-spec-canvas` · `eval-framework` · `api-prompt-optimizer`
 
 **Security** `security-audit` · `security-best-practices` · `security-ownership-map` · `security-threat-model`
 
 **Engineering** `api-design-review` · `database-design` · `docker-debug` · `git-workflows` · `testing-strategy` · `gh-fix-ci` · `pr-shell-safety-pack` · `react-query-test-harness-fixer` · `api-drift-scout` · `scrutiny-feature-reviewer` · `user-testing-flow-validator`
 
 **Deployment** `cloudflare-deploy` · `repo-first-vercel-build` · `worker` · `seeded-catalog-sync`
+
+`cloudflare-deploy` is a decision-tree skill that points at official Cloudflare docs. It is not a vendored copy of developers.cloudflare.com.
 
 **Media and capture** `pdf` · `screenshot` · `photo-geolocator` · `transcribe` · `speech` · `imagegen` · `playwright` · `playwright-interactive`
 
@@ -151,4 +147,4 @@ Two things are specific to the author's setup and worth changing:
 
 ## License
 
-MIT for the platform (sync engine, eval harness, schema) and the skills authored here. Ten skill directories are adapted from upstream sources and carry their own Apache-2.0 `LICENSE.txt`, which governs those directories. See [LICENSE](./LICENSE) for the list.
+MIT for the platform (sync engine, eval harness, schema) and the skills authored here. See [LICENSE](./LICENSE). Several skill directories are adapted from upstream sources and carry their own Apache-2.0 `LICENSE.txt`. The list is in [NOTICE.md](./NOTICE.md).
