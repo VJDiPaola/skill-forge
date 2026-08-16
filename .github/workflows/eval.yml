@@ -39,6 +39,9 @@ jobs:
       - name: Run eval harness (general-scope)
         run: python evals/eval.py --scope general
 
+      - name: Run fixture behavior checks
+        run: python evals/test_behavior.py
+
       - name: Run eval harness (all skills)
         # Non-blocking second pass so the report covers project skills too.
         # If an error shows up only in project skills, we want to see it in the log.

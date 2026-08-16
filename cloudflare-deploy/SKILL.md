@@ -5,7 +5,7 @@ description: Deploy applications to Cloudflare Workers, Pages, and related platf
 
 # Cloudflare Deploy
 
-Consolidated skill for building on the Cloudflare platform. Use decision trees below to find the right product, then load detailed references.
+Decision trees for picking a Cloudflare product, then official docs for the details. This skill is not a docs mirror and does not replace `developers.cloudflare.com`.
 
 ## Prerequisites
 
@@ -20,9 +20,11 @@ Verify auth before `wrangler deploy`, `wrangler pages deploy`, or `npm run deplo
 npx wrangler whoami    # Shows account if authenticated
 ```
 
-Not authenticated? → `references/wrangler/auth.md`
-- Interactive/local: `wrangler login` (one-time OAuth)
-- CI/CD: Set `CLOUDFLARE_API_TOKEN` env var
+Not authenticated?
+- Interactive/local: `npx wrangler login` ([wrangler login](https://developers.cloudflare.com/workers/wrangler/commands/login/))
+- CI/CD: set `CLOUDFLARE_API_TOKEN` ([API tokens](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/))
+
+After deploy, verify with `npx wrangler deployments list` or by hitting the returned URL. Do not treat a successful CLI exit as proof the new version is live.
 
 ## Quick Decision Trees
 
@@ -30,192 +32,95 @@ Not authenticated? → `references/wrangler/auth.md`
 
 ```
 Need to run code?
-├─ Serverless functions at the edge → workers/
-├─ Full-stack web app with Git deploys → pages/
-├─ Stateful coordination/real-time → durable-objects/
-├─ Long-running multi-step jobs → workflows/
-├─ Run containers → containers/
-├─ Multi-tenant (customers deploy code) → workers-for-platforms/
-├─ Scheduled tasks (cron) → cron-triggers/
-├─ Lightweight edge logic (modify HTTP) → snippets/
-├─ Process Worker execution events (logs/observability) → tail-workers/
-└─ Optimize latency to backend infrastructure → smart-placement/
+├─ Serverless functions at the edge → Workers
+├─ Full-stack web app with Git deploys → Pages
+├─ Stateful coordination/real-time → Durable Objects
+├─ Long-running multi-step jobs → Workflows
+├─ Run containers → Containers
+├─ Multi-tenant (customers deploy code) → Workers for Platforms
+├─ Scheduled tasks (cron) → Cron Triggers
+├─ Lightweight edge logic (modify HTTP) → Snippets
+├─ Process Worker execution events (logs/observability) → Tail Workers
+└─ Optimize latency to backend infrastructure → Smart Placement
 ```
 
 ### "I need to store data"
 
 ```
 Need storage?
-├─ Key-value (config, sessions, cache) → kv/
-├─ Relational SQL → d1/ (SQLite) or hyperdrive/ (existing Postgres/MySQL)
-├─ Object/file storage (S3-compatible) → r2/
-├─ Message queue (async processing) → queues/
-├─ Vector embeddings (AI/semantic search) → vectorize/
-├─ Strongly-consistent per-entity state → durable-objects/ (DO storage)
-├─ Secrets management → secrets-store/
-├─ Streaming ETL to R2 → pipelines/
-└─ Persistent cache (long-term retention) → cache-reserve/
+├─ Key-value (config, sessions, cache) → KV
+├─ Relational SQL → D1 (SQLite) or Hyperdrive (existing Postgres/MySQL)
+├─ Object/file storage (S3-compatible) → R2
+├─ Message queue (async processing) → Queues
+├─ Vector embeddings (AI/semantic search) → Vectorize
+├─ Strongly-consistent per-entity state → Durable Objects storage
+└─ Secrets management → Secrets Store
 ```
 
 ### "I need AI/ML"
 
 ```
 Need AI?
-├─ Run inference (LLMs, embeddings, images) → workers-ai/
-├─ Vector database for RAG/search → vectorize/
-├─ Build stateful AI agents → agents-sdk/
-├─ Gateway for any AI provider (caching, routing) → ai-gateway/
-└─ AI-powered search widget → ai-search/
-```
-
-### "I need networking/connectivity"
-
-```
-Need networking?
-├─ Expose local service to internet → tunnel/
-├─ TCP/UDP proxy (non-HTTP) → spectrum/
-├─ WebRTC TURN server → turn/
-├─ Private network connectivity → network-interconnect/
-├─ Optimize routing → argo-smart-routing/
-├─ Optimize latency to backend (not user) → smart-placement/
-└─ Real-time video/audio → realtimekit/ or realtime-sfu/
+├─ Run inference (LLMs, embeddings, images) → Workers AI
+├─ Vector database for RAG/search → Vectorize
+├─ Build stateful AI agents → Agents SDK
+└─ Gateway for any AI provider (caching, routing) → AI Gateway
 ```
 
 ### "I need security"
 
 ```
 Need security?
-├─ Web Application Firewall → waf/
-├─ DDoS protection → ddos/
-├─ Bot detection/management → bot-management/
-├─ API protection → api-shield/
-├─ CAPTCHA alternative → turnstile/
-└─ Credential leak detection → waf/ (managed ruleset)
+├─ Web Application Firewall → WAF
+├─ DDoS protection → DDoS
+├─ Bot detection/management → Bot Management
+├─ API protection → API Shield
+└─ CAPTCHA alternative → Turnstile
 ```
 
-### "I need media/content"
+## Official docs
 
-```
-Need media?
-├─ Image optimization/transformation → images/
-├─ Video streaming/encoding → stream/
-├─ Browser automation/screenshots → browser-rendering/
-└─ Third-party script management → zaraz/
-```
+Load the matching page. Do not invent API shapes from memory.
 
-### "I need infrastructure-as-code"
+### Compute & runtime
 
-```
-Need IaC? → pulumi/ (Pulumi), terraform/ (Terraform), or api/ (REST API)
-```
+| Product | Docs |
+|---------|------|
+| Workers | https://developers.cloudflare.com/workers/ |
+| Pages | https://developers.cloudflare.com/pages/ |
+| Durable Objects | https://developers.cloudflare.com/durable-objects/ |
+| Workflows | https://developers.cloudflare.com/workflows/ |
+| Containers | https://developers.cloudflare.com/containers/ |
+| Workers for Platforms | https://developers.cloudflare.com/cloudflare-for-platforms/workers-for-platforms/ |
+| Cron Triggers | https://developers.cloudflare.com/workers/configuration/cron-triggers/ |
+| Wrangler | https://developers.cloudflare.com/workers/wrangler/ |
 
-## Product Index
+### Storage & data
 
-### Compute & Runtime
-| Product | Reference |
-|---------|-----------|
-| Workers | `references/workers/` |
-| Pages | `references/pages/` |
-| Pages Functions | `references/pages-functions/` |
-| Durable Objects | `references/durable-objects/` |
-| Workflows | `references/workflows/` |
-| Containers | `references/containers/` |
-| Workers for Platforms | `references/workers-for-platforms/` |
-| Cron Triggers | `references/cron-triggers/` |
-| Tail Workers | `references/tail-workers/` |
-| Snippets | `references/snippets/` |
-| Smart Placement | `references/smart-placement/` |
+| Product | Docs |
+|---------|------|
+| KV | https://developers.cloudflare.com/kv/ |
+| D1 | https://developers.cloudflare.com/d1/ |
+| R2 | https://developers.cloudflare.com/r2/ |
+| Queues | https://developers.cloudflare.com/queues/ |
+| Hyperdrive | https://developers.cloudflare.com/hyperdrive/ |
+| Vectorize | https://developers.cloudflare.com/vectorize/ |
+| Secrets Store | https://developers.cloudflare.com/secrets-store/ |
 
-### Storage & Data
-| Product | Reference |
-|---------|-----------|
-| KV | `references/kv/` |
-| D1 | `references/d1/` |
-| R2 | `references/r2/` |
-| Queues | `references/queues/` |
-| Hyperdrive | `references/hyperdrive/` |
-| DO Storage | `references/do-storage/` |
-| Secrets Store | `references/secrets-store/` |
-| Pipelines | `references/pipelines/` |
-| R2 Data Catalog | `references/r2-data-catalog/` |
-| R2 SQL | `references/r2-sql/` |
+### AI & security
 
-### AI & Machine Learning
-| Product | Reference |
-|---------|-----------|
-| Workers AI | `references/workers-ai/` |
-| Vectorize | `references/vectorize/` |
-| Agents SDK | `references/agents-sdk/` |
-| AI Gateway | `references/ai-gateway/` |
-| AI Search | `references/ai-search/` |
-
-### Networking & Connectivity
-| Product | Reference |
-|---------|-----------|
-| Tunnel | `references/tunnel/` |
-| Spectrum | `references/spectrum/` |
-| TURN | `references/turn/` |
-| Network Interconnect | `references/network-interconnect/` |
-| Argo Smart Routing | `references/argo-smart-routing/` |
-| Workers VPC | `references/workers-vpc/` |
-
-### Security
-| Product | Reference |
-|---------|-----------|
-| WAF | `references/waf/` |
-| DDoS Protection | `references/ddos/` |
-| Bot Management | `references/bot-management/` |
-| API Shield | `references/api-shield/` |
-| Turnstile | `references/turnstile/` |
-
-### Media & Content
-| Product | Reference |
-|---------|-----------|
-| Images | `references/images/` |
-| Stream | `references/stream/` |
-| Browser Rendering | `references/browser-rendering/` |
-| Zaraz | `references/zaraz/` |
-
-### Real-Time Communication
-| Product | Reference |
-|---------|-----------|
-| RealtimeKit | `references/realtimekit/` |
-| Realtime SFU | `references/realtime-sfu/` |
-
-### Developer Tools
-| Product | Reference |
-|---------|-----------|
-| Wrangler | `references/wrangler/` |
-| Miniflare | `references/miniflare/` |
-| C3 | `references/c3/` |
-| Observability | `references/observability/` |
-| Analytics Engine | `references/analytics-engine/` |
-| Web Analytics | `references/web-analytics/` |
-| Sandbox | `references/sandbox/` |
-| Workerd | `references/workerd/` |
-| Workers Playground | `references/workers-playground/` |
-
-### Infrastructure as Code
-| Product | Reference |
-|---------|-----------|
-| Pulumi | `references/pulumi/` |
-| Terraform | `references/terraform/` |
-| API | `references/api/` |
-
-### Other Services
-| Product | Reference |
-|---------|-----------|
-| Email Routing | `references/email-routing/` |
-| Email Workers | `references/email-workers/` |
-| Static Assets | `references/static-assets/` |
-| Bindings | `references/bindings/` |
-| Cache Reserve | `references/cache-reserve/` |
+| Product | Docs |
+|---------|------|
+| Workers AI | https://developers.cloudflare.com/workers-ai/ |
+| Agents SDK | https://developers.cloudflare.com/agents/ |
+| AI Gateway | https://developers.cloudflare.com/ai-gateway/ |
+| WAF | https://developers.cloudflare.com/waf/ |
+| Turnstile | https://developers.cloudflare.com/turnstile/ |
+| Tunnel | https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/ |
 
 ## Troubleshooting
 
-### Escalated Network Access
-
-If deployment fails due to network issues (timeouts, DNS errors, connection resets), rerun the deploy with escalated permissions (use `sandbox_permissions=require_escalated`). The deploy requires escalated network access when sandbox networking blocks outbound requests.
+If deployment fails due to network issues (timeouts, DNS errors, connection resets), rerun the deploy with escalated permissions (`sandbox_permissions=require_escalated`). The deploy needs outbound access when sandbox networking blocks requests.
 
 Example guidance to the user:
 
