@@ -32,7 +32,7 @@ flowchart LR
     A -->|sync push| E[Claude desktop<br/>mirrored dirs, opt-in]
     B -->|sync pull| A
 
-    A --> F[evals/eval.py<br/>18 checks, 3 severities]
+    A --> F[evals/eval.py<br/>19 checks, 3 severities]
     F -->|exit 2 on any error| G[GitHub Actions<br/>build fails]
     F -->|exit 0| H[JSON + Markdown report]
 ```

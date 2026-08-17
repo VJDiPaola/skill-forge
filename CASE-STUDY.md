@@ -41,7 +41,7 @@ flowchart LR
 
     A --> F[evals/eval.py]
     F -->|Layer 1: 6 mechanical checks<br/>severity: error| G{any error?}
-    F -->|Layer 2: 12 quality checks<br/>severity: warn / info| H[report only]
+    F -->|Layer 2: 13 quality checks<br/>severity: warn / info| H[report only]
     G -->|yes, exit 2| I[CI fails]
     G -->|no, exit 0| J[CI passes]
 ```
