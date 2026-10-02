@@ -36,6 +36,9 @@ python evals/eval.py --output-prefix evals/reports/run-2026-05-01
 
 Exit code is `0` if there are no errors, `2` if any errors are present. Useful for CI.
 
+Run harness regression tests with `python -m unittest discover -s evals -p 'test_*.py'`.
+The separate `python evals/test_behavior.py` command checks the security-audit fixture.
+
 ## Checks
 
 ### Layer 1 — mechanical (always run)
@@ -58,6 +61,30 @@ Exit code is `0` if there are no errors, `2` if any errors are present. Useful f
 | `cluster_membership` | warning | skill is in a known cluster but missing siblings from `related` |
 | `tags_non_empty` | warning | tags field is empty |
 | `freshness` | info / warning | more than 90 / 180 days since last commit touching the skill |
+
+### Project-name leakage
+
+`PROJECT_NAMES` in `eval.py` ships with the owner's public project names:
+SpendForge, RefereeOS, ResumeTailor, LinkedIn-Resume-Builder, teamvince, PersonalOS,
+Commons Copilot, commons-copilot, earned-autonomy, software-factory, and skill-forge.
+The list includes the explicit public repository aliases for ResumeTailor and
+Commons Copilot. Adapt this list for your own
+library. Use explicit names or aliases, not generic terms such as `commons`,
+`factory`, or `software`.
+
+`no_project_names` checks the `SKILL.md` description and body for literal,
+case-insensitive matches. Names next to punctuation, in paths, and in URLs match;
+names embedded in larger word/underscore identifiers do not. Spaces and hyphens
+are literal: `software-factory` matches, while the generic phrase `software factory`
+does not. Add alternate spellings explicitly when needed.
+
+Project-scoped skills are exempt, including when running `--scope all`. A skill
+that intentionally specializes in one project should declare `scope: project`
+and follow the target restrictions in `AGENTS.md`. The check remains a warning,
+so it affects the grade but does not fail CI by itself. Library documentation,
+tests, and reference files are outside this check; self-references to skill-forge
+in this README do not become skill findings. This bounded list is not a general
+detector for unknown project names or paths.
 
 ### Layer 2 — category-specific
 
