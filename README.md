@@ -51,6 +51,7 @@ Run the quality gate:
 
 ```bash
 python evals/eval.py
+python -m unittest discover -s evals -p 'test_*.py'  # harness regression checks
 python evals/test_behavior.py   # fixture check for a high-stakes skill
 ```
 
@@ -142,7 +143,7 @@ The tree is a working library used to exercise the harness, not a catalog to sta
 
 Two things are specific to the author's setup and worth changing:
 
-- `PROJECT_NAMES` in `evals/eval.py` is empty. Add your own product and repo names so the harness catches project leakage into general-scope skills.
+- `PROJECT_NAMES` in `evals/eval.py` contains this library owner's public product and repo names. Replace or extend it with explicit names from your setup so the harness warns about project leakage into general-scope descriptions and bodies. Matching is case-insensitive and excludes names embedded in larger words; see [the matching rules](evals/README.md#project-name-leakage).
 - The desktop sync target path in `sync.ps1` and `sync.sh` points at the Claude desktop app's skills-plugin folder. Adjust or disable it with `targets.desktop: false`.
 
 ## License

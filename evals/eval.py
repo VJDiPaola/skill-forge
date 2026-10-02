@@ -75,11 +75,20 @@ CLUSTERS: dict[str, list[str]] = {
     ],
 }
 
-# Known project names that should never appear in general-scope skill bodies.
-# Add your own product and repo names here. A general-scope skill that mentions
-# a specific project will mislead an agent working in an unrelated codebase.
-# Example: PROJECT_NAMES = ["acme-portal", "acme_portal", "acmeportal"]
-PROJECT_NAMES: list[str] = []
+# Public project names checked in general-scope descriptions and bodies.
+# Add explicit product/repo spellings, not generic words such as "factory" or
+# "commons". Aliases are opt-in; matching is literal and case-insensitive.
+PROJECT_NAMES: list[str] = [
+    "SpendForge",
+    "RefereeOS",
+    "ResumeTailor",
+    "teamvince",
+    "PersonalOS",
+    "Commons Copilot",
+    "earned-autonomy",
+    "software-factory",
+    "skill-forge",
+]
 
 # Trigger phrases that signal intent-matching descriptions.
 TRIGGER_PATTERNS = [
@@ -304,8 +313,13 @@ def check_description_triggers(s: Skill, _all: dict[str, Skill]) -> list[Issue]:
 def check_no_project_names(s: Skill, _all: dict[str, Skill]) -> list[Issue]:
     if s.scope != "general":
         return []
-    haystack = (s.description + " " + s.body).lower()
-    hits = [p for p in PROJECT_NAMES if p in haystack]
+    haystack = s.description + "\n" + s.body
+    # Word boundaries avoid matching names embedded in unrelated identifiers;
+    # punctuation still allows repo URLs, paths, domains and possessives.
+    hits = [
+        p for p in PROJECT_NAMES
+        if re.search(r"(?<!\w)" + re.escape(p) + r"(?!\w)", haystack, re.IGNORECASE)
+    ]
     if hits:
         return [Issue("no_project_names", "warning",
                       f"general-scope skill mentions project name(s): {', '.join(hits)}")]
