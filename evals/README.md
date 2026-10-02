@@ -65,8 +65,10 @@ The separate `python evals/test_behavior.py` command checks the security-audit f
 ### Project-name leakage
 
 `PROJECT_NAMES` in `eval.py` ships with the owner's public project names:
-SpendForge, RefereeOS, ResumeTailor, teamvince, PersonalOS, Commons Copilot,
-earned-autonomy, software-factory, and skill-forge. Adapt this list for your own
+SpendForge, RefereeOS, ResumeTailor, LinkedIn-Resume-Builder, teamvince, PersonalOS,
+Commons Copilot, commons-copilot, earned-autonomy, software-factory, and skill-forge.
+The list includes the explicit public repository aliases for ResumeTailor and
+Commons Copilot. Adapt this list for your own
 library. Use explicit names or aliases, not generic terms such as `commons`,
 `factory`, or `software`.
 

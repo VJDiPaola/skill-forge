@@ -38,6 +38,7 @@ class ProjectNameChecks(unittest.TestCase):
         names = (
             "SpendForge", "RefereeOS", "ResumeTailor", "teamvince", "PersonalOS",
             "Commons Copilot", "earned-autonomy", "software-factory", "skill-forge",
+            "commons-copilot", "LinkedIn-Resume-Builder",
         )
         for name in names:
             for field in ("description", "body"):
@@ -57,6 +58,7 @@ class ProjectNameChecks(unittest.TestCase):
     def test_generic_words_and_larger_identifiers_do_not_match(self):
         self.assertEqual(self.findings(body=(
             "Build a software factory with earned autonomy and a copilot for commons. "
+            "Describe the riad courtyard. "
             "SpendForgeable preRefereeOS RefereeOS2 my_teamvince teamvince_config "
             "PersonalOSmosis skill-forgery"
         )), [])
